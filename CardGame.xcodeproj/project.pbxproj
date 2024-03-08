@@ -37,7 +37,6 @@
 		2759AF292B9AA75D00A2A43F = {
 			isa = PBXGroup;
 			children = (
-				2759AF432B9AA7A500A2A43F /* CardView.swift */,
 				2759AF342B9AA75D00A2A43F /* CardGame */,
 				2759AF332B9AA75D00A2A43F /* Products */,
 			);
@@ -56,6 +55,7 @@
 			children = (
 				2759AF352B9AA75D00A2A43F /* CardGameApp.swift */,
 				2759AF372B9AA75D00A2A43F /* ContentView.swift */,
+				2759AF432B9AA7A500A2A43F /* CardView.swift */,
 				2759AF392B9AA75F00A2A43F /* Assets.xcassets */,
 				2759AF3B2B9AA75F00A2A43F /* Preview Content */,
 			);
