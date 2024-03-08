@@ -7,50 +7,52 @@
 
 import SwiftUI
 
+struct CardTheme {
+    let name: String
+    let emojis: String
+}
+
 struct ContentView: View {
-    let emojiClection = "🚗🌏⏰💎🪙✏️❤️"
-    @State var count = 4
+    let emojiThemes = [
+        CardTheme(name: "Normal", emojis: "🚗🌏⏰💎🪙❤️🔮🎾🍎"),
+        CardTheme(name: "Animal", emojis: "🐶🦊🐽🐯🦄🐝🐠🐖🐏"),
+        CardTheme(name: "Fruit", emojis: "🍏🍎🍊🥦🍉🍌🍋🌽🍇")
+    ]
+    
+    
+    @State var count = 9
+    @State var themeIndex = 0
 
     var body: some View {
         VStack {
+            Text("Memorize it!")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(.orange)
             ScrollView{
                 cards
             }
             Spacer()
             HStack{
-                buttonRemove
-                Spacer()
-                buttonAdd
+                ForEach(emojiThemes.indices, id: \.self){ index in
+                    Button(action: {
+                        themeIndex = index
+                    }) {
+                        Text(emojiThemes[index].name)
+                    }
+                    .font(.title)
+                    .bold()
+                }
+                
             }
         }
         .padding()
     }
     
-    func adjustButton(by offset: Int, label: String) -> some View{
-        let emojis = emojiClection.split(separator: "").map{String($0)}
-        return Button(action: {
-            count += offset
-        }, label: {
-            Image(systemName: label)
-        })
-        .imageScale(.large)
-        .disabled(count + offset <= 1 || count + offset > emojis.count)
-    }
-    
-    var buttonRemove: some View{
-        adjustButton(by: -1, label: "minus.square")
-    }
-    
-    var buttonAdd: some View{
-        adjustButton(by: 1, label: "plus.app")
-    }
-    
-
-    
     var cards: some View{
-        let emojis = emojiClection.split(separator: "").map{String($0)}
+        let emojis = emojiThemes[themeIndex].emojis.split(separator: "").map{String($0)}
         return LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))]) {
-            ForEach(1..<count, id: \.self){ index in
+            ForEach(emojis.indices, id: \.self){ index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
