@@ -10,13 +10,14 @@ import SwiftUI
 struct CardTheme {
     let name: String
     let emojis: String
+    let icon: String
 }
 
 struct ContentView: View {
     let emojiThemes = [
-        CardTheme(name: "Normal", emojis: "🚗🌏⏰💎🪙🎾"),
-        CardTheme(name: "Animal", emojis: "🐶🦊🐯🦄🐝🐠"),
-        CardTheme(name: "Fruit",  emojis: "🍏🍊🥦🍋🌽🍇")
+        CardTheme(name: "Normal", emojis: "🚗🌏⏰💎🪙🎾", icon: "🚗"),
+        CardTheme(name: "Animal", emojis: "🐶🦊🐯🦄🐝🐠", icon: "🐶"),
+        CardTheme(name: "Fruit",  emojis: "🍏🍊🥦🍋🌽🍇", icon: "🍇")
     ]
     
     
@@ -25,10 +26,19 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            VStack{
+                Text(emojiThemes[themeIndex].icon)
+                    .font(.custom("SF UI Display", size: CGFloat(60.0)))
+                Text(emojiThemes[themeIndex].name)
+                    .font(.custom("Galvji", size: CGFloat(20.0)))
+            }
+            .padding(10)
+            
             Text("Memorize it!")
                 .font(.largeTitle)
                 .bold()
                 .foregroundColor(.orange)
+            Spacer()
             ScrollView{
                 cards
             }
@@ -38,10 +48,17 @@ struct ContentView: View {
                     Button(action: {
                         themeIndex = index
                     }) {
-                        Text(emojiThemes[index].name)
+                        VStack{
+                            Text(emojiThemes[index].icon)
+                                .font(.custom("SF Pingfang", size: 50))
+                            Text(emojiThemes[index].name)
+                        }
+                        
                     }
-                    .font(.title)
-                    .bold()
+                    .padding(10)
+                    .font(.custom("Galvji", size: CGFloat(20.0)))
+                    .foregroundColor(.black)
+                
                 }
                 
             }
