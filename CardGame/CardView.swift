@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct CardView: View {
-    
+    let content: String
     @State var isFaceUp = false
-    
+
     var body: some View {
         ZStack{
             let base = RoundedRectangle(cornerRadius: 20)
             if isFaceUp {
                 base.foregroundColor(.white)
                 base.strokeBorder(style: StrokeStyle(lineWidth: 2))
-                Text("🌏").font(.largeTitle)
-                
+                Text(content).font(.largeTitle)
             } else {
                 base.foregroundColor(.orange)
+                base.strokeBorder(style: StrokeStyle(lineWidth: 2))
             }
         }
         .onTapGesture(perform: {
@@ -32,5 +32,5 @@ struct CardView: View {
 
 
 #Preview {
-    CardView()
+    CardView(content: "💎")
 }

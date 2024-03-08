@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    let emojiClection = "🚗🌏⏰💎"
     var body: some View {
+        let emojis = emojiClection.split(separator: "").map{String($0)}
         VStack {
-            CardView(isFaceUp: true)
-            CardView()
-            CardView()
-            CardView(isFaceUp: true)
+            ForEach(emojis.indices, id: \.self){ index in
+                CardView(content: emojis[index])
+            }
         }
         .padding()
     }
