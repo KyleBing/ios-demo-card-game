@@ -14,9 +14,9 @@ struct CardTheme {
 
 struct ContentView: View {
     let emojiThemes = [
-        CardTheme(name: "Normal", emojis: "🚗🌏⏰💎🪙❤️🔮🎾🍎"),
-        CardTheme(name: "Animal", emojis: "🐶🦊🐽🐯🦄🐝🐠🐖🐏"),
-        CardTheme(name: "Fruit", emojis: "🍏🍎🍊🥦🍉🍌🍋🌽🍇")
+        CardTheme(name: "Normal", emojis: "🚗🌏⏰💎🪙🎾"),
+        CardTheme(name: "Animal", emojis: "🐶🦊🐯🦄🐝🐠"),
+        CardTheme(name: "Fruit",  emojis: "🍏🍊🥦🍋🌽🍇")
     ]
     
     
@@ -50,8 +50,11 @@ struct ContentView: View {
     }
     
     var cards: some View{
-        let emojis = emojiThemes[themeIndex].emojis.split(separator: "").map{String($0)}
-        return LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))]) {
+        let emojis = (emojiThemes[themeIndex].emojis + emojiThemes[themeIndex].emojis)
+            .split(separator: "")
+            .map{String($0)}
+            .shuffled()
+        return LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
             ForEach(emojis.indices, id: \.self){ index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
