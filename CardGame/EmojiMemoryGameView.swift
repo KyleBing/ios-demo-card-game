@@ -31,6 +31,7 @@ struct EmojiMemoryGameView: View {
             Spacer()
             ScrollView{
                 cards
+                    .animation(.default, value: viewModel.cards)
             }
             Spacer()
             Button(action: {
@@ -67,10 +68,13 @@ struct EmojiMemoryGameView: View {
             columns: [GridItem(.adaptive(minimum: 65), spacing: 0)],
             spacing: 0
         ) {
-            ForEach(viewModel.cards.indices, id: \.self){ index in
-                CardView(viewModel.cards[index])
+            ForEach(viewModel.cards){ card in
+                CardView(card)
                     .aspectRatio(4/5, contentMode: .fit)
                     .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
         }
     }

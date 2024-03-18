@@ -8,7 +8,7 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    private static let emojis = ["🚗","🌏","⏰","💎","🪙","🎾"]
+    private static let emojis = ["🚗","🌏","⏰","💎","🪙","🎾","🍏","🍊","🥦","🍋","🌽","🍇"]
     
     // Addition Theme
     static let emojiThemes = [
@@ -18,7 +18,7 @@ class EmojiMemoryGame: ObservableObject {
     ]
 
     private static func createMemoryGame () -> MemoryGame<String> {
-        return MemoryGame<String>(numberOfCards: 4) { pairIndex in
+        return MemoryGame<String>(numberOfCards: 10) { pairIndex in
             if (emojis.indices.contains(pairIndex)){
                 return emojis[pairIndex]
             } else {
@@ -38,10 +38,10 @@ class EmojiMemoryGame: ObservableObject {
     
     func shuffle(){
         gameModel.shuffle()
-        print(gameModel.cards)
     }
     
     func choose (_ card: MemoryGame<String>.Card){
+        
         gameModel.chooseCard(card)
     }
     
